@@ -158,7 +158,61 @@ nav a:hover {
         }
 
 
-
+@media (max-width: 1024px) {
+         .formation-container {
+             flex-direction: column;
+             align-items: center;
+} 
+    #terrain, #reserved-players { 
+             width: 90%; 
+             margin: 10px 0; 
+        } 
+            #terrain { 
+            max-width: 100%; 
+        } 
+        #reserved-players { 
+            max-width: 100%; 
+            height: auto; 
+        } 
+        #reserved-players .empty-card {
+         width: 100px; 
+         height: 130px;
+         } 
+        }
+@media (max-width: 768px) { 
+        #hero h2 { 
+        font-size: 2em; 
+        } 
+        #hero p { 
+        font-size: 1em; 
+    } 
+    .empty-card {
+     width: 60px;
+      height: 80px;
+     } 
+     #reserved-players .empty-card {
+     width: 70px;
+      height: 90px;
+     } 
+    }
+@media (max-width: 480px) { 
+    .empty-card { 
+    width: 50px;
+     height: 70px; 
+    } 
+    #reserved-players .empty-card {
+     width: 60px;
+      height: 80px;
+     } 
+     .formation-container {
+     flex-direction: column; 
+     align-items: center; 
+    }
+     #terrain, #reserved-players {
+         width: 100%;
+         margin: 5px 0; 
+        } 
+    }
 
   /* Popup*/ 
 
