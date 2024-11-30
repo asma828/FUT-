@@ -246,6 +246,98 @@
     ></div>
   </div>
   </div>
-            
+   
+  <div id="createPop" class="fixed inset-0 overflow-y-auto backdrop-blur-md z-50 hidden open:flex items-center justify-center  ">
+    <div class="bg-slate-500 p-6 rounded-lg shadow-lg w-80 overflow-y-auto text-white">
+      <div class="flex items-center justify-between ">
+        <h1 class="text-lg font-semibold mb-4 ">Create New Player</h1>
+        <img src="./assets/x.svg" onclick="onCloseCreatePlayer()" class="w-8 cursor-pointer">
+      </div>
+
+
+      <form id="playerForm">
+        <div class="">
+          <label for="nom" class="block font-medium ">Name</label>
+          <input id="nom"
+            type="text"
+            name="name"
+            class="w-full px-4 w-full bg-white border border-gray-600 rounded-md mb-2 text-black"
+            placeholder="Player Name"
+            required
+          />
+          <small class="text-red-500 hidden"></small>
+        </div>
+        <div >
+          <label for="url" class="block font-medium ">Photo URL</label>
+          <input id="url"
+            type="url"
+            name="photo"
+            class="w-full  px-4 w-full bg-white border border-gray-600 rounded-md mb-2 text-black"
+            placeholder="Photo URL"
+          />
+          <small class="text-red-500 hidden"></small>
+        </div>
+        <div>
+          <label for="flag" class="block font-medium ">Flag</label>
+          <input id="flag"
+            type="url"
+            name="flag"
+            class="w-full  px-4 w-full bg-white border border-gray-600 rounded-md mb-2 text-black"
+            placeholder="Flag URL"
+          />
+          <small class="text-red-500 hidden"></small>
+        </div>
+        <div>
+          <label for="logo" class="block font-medium">Logo</label>
+          <input id="logo"
+            type="url"
+            name="logo"
+            class="w-full px-4 w-full bg-white border border-gray-600 rounded-md mb-2 text-black"
+            placeholder="Logo URL"
+          />
+          <small class="text-red-500 hidden"></small>
+        </div>
+        <div >
+            <label for="ratibng" class="block font-medium ">Rating</label>
+            <input id="ratibng"
+              type="number"
+              name="rating"
+              class="w-full px-4 w-full bg-white border border-gray-600 rounded-md mb-2 text-black"
+              placeholder="rating"
+            />
+          <small class="text-red-500 hidden"></small>
+        </div>
+        <div >
+          <label for="positionSelect" class="block font-medium">Position</label>
+          <select 
+            name="position"
+            id="positionSelect"
+            class="w-full px-4 w-full bg-white border border-gray-600 rounded-md mb-2 text-black"
+            required
+          >
+            <option value="" disabled selected>Select Position</option>
+            <option value="GK">Goalkeeper (GK)</option>
+            <option value="CM">Central Midfielder (CM)</option>
+            <option value="ST">Striker (ST)</option>
+            <option value="CB">Center back (CB)</option>
+            <option value="LB">Left back (LB)</option>
+            <option value="RB">Right back (RB)</option>
+            <option value="LW">Left wing (LW)</option>
+            <option value="RW">Right wing (RW)</option>
+          </select>
+          <small class="text-red-500 hidden"></small>
+        </div>
+        <div id="dynamicFields" class="grid grid-cols-2 gap-1"></div>
+        <button
+          type="submit"
+          class=" w-full bg-gray-700 text-white px-4 py-2  rounded-md hover:bg-gray-600"
+        >
+          Create Player
+        </button>
+      </form>
+      
+    </div>
+  </div>
+
     </body>
 </html>
