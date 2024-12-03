@@ -451,8 +451,146 @@ const closeListPlayers = () => {
   document.getElementById("players_list").toggleAttribute("open", false);
 };
 
+const deletePlayer = (target) => {
+  const playerName = target.getAttribute("data-name");
+
+  activePlayer = activePlayer.filter(
+    (pl) => pl.name.split(" ")[0] !== playerName
+  );
+
+  // Create a new placeholder card
+  const newDiv = document.createElement("div");
+  newDiv.innerHTML = `
+      <div
+        id="${target.id}"
+        class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+      >
+        <img
+          src="img/8cdd9360-e77b-44c4-95cc-66d004addd93.png"
+          alt="Player badge"
+          class="absolute w-full h-full z-10"
+        />
+        
+      </div>
+    `;
+
+  const placeholder = newDiv.firstElementChild;
+  target.replaceWith(placeholder);
+  checkPlaceholders();
+};
+
+const editPlayer = (player) => {
+  existName = player.name.split(" ")[0]; 
+  const targetPosition = document.querySelector(`[data-name='${existName}']`);
+  sideBar_title.textContent = "Update Players";
+  
+  activePlayer = activePlayer.filter((pl) => pl.name !== player.name);
+  openListPlayers();
+  filteredPlayer = players.filter(
+    (pl) =>
+      pl.position === targetPosition.id && pl.name.split(" ")[0] !== existName
+  );
+
+  if (targetPosition) {
+    renderListPlayers(targetPosition);
+  } else {
+    console.error("Target position not found for editing.");
+  }
+  existName = null;
+};
 
 
+const createPlayerCard = (player) => {
+    console.log("Player Data:", player);
+  const card = document.createElement("div");
+  card.dataset.name = player.name.split(" ")[0];
+  card.id = player.position;
+  card.className =
+    "w-16 sm:w-24 md:w-30 group lg:w-32 xl:w-36 aspect-[1/1.4] relative z-20 cursor-pointer hover:scale-[1.3] transition-transform activePlayers";
+    const isGoalkeeper = player.position === "GK";
+    card.innerHTML = `
+    <img src="img/8cdd9360-e77b-44c4-95cc-66d004addd93.png" alt="Player badge" class="absolute w-full h-full z-10"/>
+    <div class="relative z-20 w-full h-full ">
+    <div class="absolute hidden z-30 group-hover:flex group-hover:flex-col w-[80%] lg:w-[100%] items-end justify-between pr-2 lg:pr-4 top-0 right-0 space-y-4 md:space-y-[20px] lg:space-y-[25px] lg:top-[10px]">
+    </div>
+        <img src="${player.photo}" alt="Player Photo" class="absolute w-[50%] lg:w-[60%]  top-[20%] lg:top-[15%] right-[20%]"/>
+        <div class="text-[6px] md:text-[11px] lg:text-[14px] text-white pt-[15px] md:pt-[22px] lg:pt-[35px] pl-[8px] md:pl-[12px] lg:pl-[18px]">
+                    <p class="font-extrabold ">${player.rating}</p>
+                    <p class="font-semibold">${player.position}</p>
+                    <img src="${player.flag}" alt="" class="w-[10px] md:w-[12px]">
+                    <img src="${player.logo}" alt="" class="w-[10px] md:w-[12px] ">
+                </div>
+            <div class="absolute top-[60%] w-full text-center text-white">
+              <p class="text-[30%] md:text-[55%] lg:text-[70%] max-w-[70%] mx-auto w-full truncate  font-semibold">${player.name}</p>
+            
+             <div class="text-[5px] md:text-[8px] lg:text-[11px] text-[#393218] flex flex-col gap-0 justify-center items-center">
+              ${
+                  isGoalkeeper
+                    ? `
+                <div class="flex gap-[1px] text-white">
+                    <p>DI</p>
+                    <p>HA</p>
+                    <p>KI</p>
+                    <p>RE</p>
+                    <p>SP</p>
+                    <p>PO</p>
+                </div>
+                <div class="flex gap-[1px] text-white">
+                    <p class="font-extrabold">${player.diving}</p>
+                    <p class="font-extrabold">${player.handling}</p>
+                    <p class="font-extrabold">${player.kicking}</p>
+                    <p class="font-extrabold">${player.reflexes}</p>
+                    <p class="font-extrabold">${player.speed}</p>
+                    <p class="font-extrabold">${player.positioning}</p>
+                </div>
+        </div>
+        
+    </div>
+`
+                    : `
+    
+            <div class="text-[5px] md:text-[8px] lg:text-[11px] text-[#393218] flex flex-col gap-0 justify-center items-center">
+                <div class="flex gap-[1px] text-white">
+                    <p>PA</p>
+                    <p>SH</p>
+                    <p>PA</p>
+                    <p>DR</p>
+                    <p>DE</p>
+                    <p>PH</p>
+                </div>
+                <div class="flex gap-[1px] text-white">
+                    <p class="font-extrabold">${player.passing}</p>
+                    <p class="font-extrabold">${player.shooting}</p>
+                    <p class="font-extrabold">${player.pace}</p>
+                    <p class="font-extrabold">${player.dribbling}</p>
+                    <p class="font-extrabold">${player.defending}</p>
+                    <p class="font-extrabold">${player.physical}</p>
+                    `
+              }
+                </div>
+        </div>
+        
+    </div>
+    
+   
+`;
+const actionMenu = card.querySelector(".absolute.hidden");
+  
+const editpl = document.createElement("img");
+editpl.src = "./assets/update.png";
+editpl.className = "w-4 animate-spin";
+editpl.onclick = () => editPlayer(player, card);
+
+const deletPl = document.createElement("img");
+deletPl.src = "./assets/trash.svg";
+deletPl.className = "w-4";
+deletPl.onclick = () => deletePlayer(card);
+
+actionMenu.appendChild(editpl);
+actionMenu.appendChild(deletPl);
+
+return card;
+};
 
 
 
