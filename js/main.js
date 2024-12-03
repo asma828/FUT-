@@ -593,5 +593,25 @@ return card;
 };
 
 
+const appendPlayer = (player, targetElement) => {
+  
+  openListPlayers();
+  if (!targetElement) {
+    console.error("Invalid target element.");
+    return;
+  }
+
+  if (existName && typeof existName === "string") {
+    activePlayer = players.filter((pl) => pl.name.split(" ")[0] !== existName);
+  }
+
+  const newCard = createPlayerCard(player);
+  activePlayer.push(player);
+
+  targetElement.replaceWith(newCard);
+
+  existName = null;
+  closeListPlayers();
+};
 
 
