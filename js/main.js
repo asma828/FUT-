@@ -614,4 +614,85 @@ const appendPlayer = (player, targetElement) => {
   closeListPlayers();
 };
 
+// show players in the select popup
+  
+const renderListPlayers = (targetPosition) => {
+  playerList.innerHTML = "";
+
+  filteredPlayer.forEach((player) => {
+    const playerCard = document.createElement("div");
+    playerCard.className =
+      "flex flex-col py-3 cursor-pointer  rounded-lg bg-[url('img/8cdd9360-e77b-44c4-95cc-66d004addd93.png')] bg-cover bg-center w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-[1.3] cursor-pointer transition-transform";
+      const isGoalkeeper = player.position === "GK";
+      playerCard.innerHTML = `
+      <div class="flex pl-0 mt-0 lg:mt-4  ">
+              <div class="text-[5px] md:text-[10px] lg:text-[14px] text-white pt-[12px] lg:pt-[12px] pl-[8px] md:pl-[12px] lg:pl-[18px]">
+                  <p class="font-extrabold">${player.rating}</p>
+                  <p class="font-semibold">${player.position}</p>
+                  <img src="${player.flag}" alt="" class="w-[10px] lg:w-[12px]">
+                  <img src="${player.logo}" alt="" class="w-[10px] lg:w-[12px]">
+              </div>
+              <div class="text-center text-xs text-white font-extra-bold">
+                  <img src="${player.photo}" alt="${player.name}" class=" w-[80%]   top-[20%] lg:top-[15%] right-[20%]">
+                  
+              </div>
+          </div><p class=" text-center font-extrabold text-[5px] md:text-[8px] lg:text-[10px]">${player.name}</p>
+             ${
+                isGoalkeeper
+                  ? `
+           <div class="text-[5px] md:text-[8px] lg:text-[11px] text-[#393218] flex flex-col gap-0 justify-center items-center">
+              <div class="flex gap-[1px] text-white">
+                  <p>DI</p>
+                  <p>HA</p>
+                  <p>KI</p>
+                  <p>RE</p>
+                  <p>SP</p>
+                  <p>PO</p>
+              </div>
+              <div class="flex gap-[1px] text-white">
+                  <p class="font-extrabold">${player.diving}</p>
+                  <p class="font-extrabold">${player.handling}</p>
+                  <p class="font-extrabold">${player.kicking}</p>
+                  <p class="font-extrabold">${player.reflexes}</p>
+                  <p class="font-extrabold">${player.speed}</p>
+                  <p class="font-extrabold">${player.positioning}</p>
+              </div>
+          </div>
+
+`
+                  : `
+
+          <div class="text-[5px] md:text-[8px] lg:text-[11px] text-[#393218] flex flex-col gap-0 justify-center items-center">
+              <div class="flex gap-[1px] text-white">
+                  <p>PA</p>
+                  <p>SH</p>
+                  <p>PA</p>
+                  <p>DR</p>
+                  <p>DE</p>
+                  <p>PH</p>
+              </div>
+              <div class="flex gap-[1px] text-white">
+                  <p class="font-extrabold">${player.passing}</p>
+                  <p class="font-extrabold">${player.shooting}</p>
+                  <p class="font-extrabold">${player.pace}</p>
+                  <p class="font-extrabold">${player.dribbling}</p>
+                  <p class="font-extrabold">${player.defending}</p>
+                  <p class="font-extrabold">${player.physical}</p>
+                        `
+            }
+              </div>
+          </div>
+
+            
+`;
+
+    if (targetPosition) {
+      playerCard.onclick = () => {
+        appendPlayer(player, targetPosition);
+      };
+    }
+
+    playerList.appendChild(playerCard);
+  });
+};
 
