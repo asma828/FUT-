@@ -696,3 +696,11 @@ const renderListPlayers = (targetPosition) => {
   });
 };
 
+let createPlayerPop = document.getElementById("createPop");
+  
+  const onOpenCreatePlayer = () => {
+    createPlayerPop.toggleAttribute("open", true);
+  };
+  const onCloseCreatePlayer = () => {
+    createPlayerPop.toggleAttribute("open", false);
+  };
