@@ -704,3 +704,67 @@ let createPlayerPop = document.getElementById("createPop");
   const onCloseCreatePlayer = () => {
     createPlayerPop.toggleAttribute("open", false);
   };
+
+  const positionAttributes = {
+    GK: [
+      { name: "diving", label: "Diving", type: "number" },
+      { name: "handling", label: "Handling", type: "number" },
+      { name: "kicking", label: "Kicking", type: "number" },
+      { name: "reflexes", label: "Reflexes", type: "number" },
+      { name: "speed", label: "Speed", type: "number" },
+      { name: "positioning", label: "Positioning", type: "number" },
+    ],
+    other: [
+      { name: "pace", label: "Pace", type: "number" },
+      { name: "shooting", label: "Shooting", type: "number" },
+      { name: "passing", label: "Passing", type: "number" },
+      { name: "dribbling", label: "Dribbling", type: "number" },
+      { name: "defending", label: "Defending", type: "number" },
+      { name: "physical", label: "Physical", type: "number" },
+    ],
+  };
+  
+  document.getElementById("positionSelect").addEventListener("change", (e) => {
+    let dynamicFields = document.getElementById("dynamicFields");
+  
+    dynamicFields.innerHTML = "";
+  
+    if (e.target.value === "GK") {
+      positionAttributes["GK"].forEach((attr) => {
+        const field = document.createElement("div");
+        field.className = "mb-3";
+        field.innerHTML = `
+          <label class="block font-medium mb-2">${attr.label}</label>
+          <input id="${attr.label}"
+            type="${attr.type}"
+            name="${attr.name}"
+            class="w-full mt-1 px-4 w-full bg-white border border-gray-600 rounded-md mb-4 text-black"
+            placeholder="${attr.label}"
+          />
+        `;
+        dynamicFields.appendChild(field);
+      });
+    } else {
+      positionAttributes["other"].forEach((attr) => {
+        const field = document.createElement("div");
+        field.innerHTML = `
+            <label class="block font-medium mb-2">${attr.label}</label>
+            <input
+              type="${attr.type}"
+              name="${attr.name}"
+              class="w-full px-4 w-full bg-white border border-gray-600 rounded-md mb-2 text-black"
+              placeholder="${attr.label}"
+            />
+          `;
+        dynamicFields.appendChild(field);
+      });
+    }
+  });
+  
+  
+  document.getElementById("playerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+  
+    const playerForm = document.getElementById("playerForm");
+    let formData = new FormData(playerForm);
+    let playerData = Object.fromEntries(formData.entries());
