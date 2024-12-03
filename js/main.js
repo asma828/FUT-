@@ -416,3 +416,41 @@ const players = [
       positioning: 85,
     },
   ];
+  let activePlayer = [];
+
+let filteredPlayer = players;
+
+let existName = null;
+
+let playerList = document.querySelector(".players_list");
+
+let sideBar_title = document.getElementById("sideBar_title");
+
+const openListPlayers = () => {
+  document.getElementById("players_list").toggleAttribute("open", true);
+};
+
+const checkPlaceholders = () => {
+  document.querySelectorAll(".placeholder_player").forEach((eleClicked) => {
+    eleClicked.onclick = () => {
+      const targetPosition = eleClicked;
+      sideBar_title.textContent = "Select Player";
+      filteredPlayer = players.filter(
+        (player) =>
+          player.position === targetPosition.id &&
+          !activePlayer.some((active) => active.name === player.name)
+      );
+      openListPlayers();
+      renderListPlayers(targetPosition);
+    };
+  });
+};
+checkPlaceholders();
+
+
+
+
+
+
+
+
