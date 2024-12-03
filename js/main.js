@@ -447,6 +447,9 @@ const checkPlaceholders = () => {
 };
 checkPlaceholders();
 
+const closeListPlayers = () => {
+  document.getElementById("players_list").toggleAttribute("open", false);
+};
 
 
 
